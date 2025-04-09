@@ -10,7 +10,7 @@ module top(
         .w(sw),
         .Clk(btnC),
         .R(btnU),
-        .Z(led[0]),
+        .za(led[1]),
         .Y_out(led[9:7])
     );
     
@@ -18,7 +18,7 @@ module top(
         .w(sw),
         .Clk(btnC),
         .R(btnU),
-        .Z(led[1]),
+        .za(led[0]),
         .A(led[2]),
         .B(led[3]),
         .C(led[4]),

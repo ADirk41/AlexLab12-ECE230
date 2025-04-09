@@ -1,6 +1,6 @@
 module binary_states (
     input w, Clk, R,
-    output Z, [2:0] Y_out
+    output za, [2:0] Y_out
 );
     
     // *Spliced from Lab Instructions, then modified for 3 bits*
@@ -12,7 +12,7 @@ module binary_states (
         .D(Y_N[0]),
         .clk(Clk),
         .reset(R),
-        .Q(Y_N[0])
+        .Q(Y_S[0])
     );
     
     dff one(
@@ -20,7 +20,7 @@ module binary_states (
         .D(Y_N[1]),
         .clk(Clk),
         .reset(R),
-        .Q(Y_N[1])
+        .Q(Y_S[1])
     );
     
     dff two(
@@ -28,7 +28,7 @@ module binary_states (
         .D(Y_N[2]),
         .clk(Clk),
         .reset(R),
-        .Q(Y_N[2])
+        .Q(Y_S[2])
     );
     
     // Implement states A, B, C, D, and E states
@@ -37,7 +37,7 @@ module binary_states (
     assign Y_N[2] = w & (Y_S[2] | Y_S[1] & Y_S[0]);
     
     // Getting Weird Wired
-    assign Z = Y_S[2] | Y_S[1] & ~Y_S[0];
+    assign za = Y_S[2] | Y_S[1] & ~Y_S[0];
     assign Y_out = Y_S;
     
 endmodule

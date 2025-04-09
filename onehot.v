@@ -1,11 +1,11 @@
 module one_hot (
     input w, Clk, R,
-    output Z, A, B, C, D, E
+    output za, A, B, C, D, E
 );
 
     // BAH HUMBUG
-    wire A_S, B_S, C_S, D_S, E_S;
-    wire A_N, B_N, C_N, D_N, E_N;
+    wire A_S, B_S, C_S, D_S, E_S; // Current State
+    wire A_N, B_N, C_N, D_N, E_N; // Next State
 
     dff Alpha(
         .Default(1'b1),
@@ -49,12 +49,12 @@ module one_hot (
     
     // Implement states A, B, C, D, and E states
     assign A_N = 1'b0;
-    assign B_N = ~w & A_S;
+    assign B_N = ~w & (A_S | D_S | E_S);
     assign C_N = ~w & (B_S | C_S);
-    assign D_N = w & A_S;
-    assign E_N = ~w & (D_S | E_S);*/
+    assign D_N = w & (A_S | B_S | C_S);
+    assign E_N = w & (D_S | E_S);
     
-    assign Z = C_S | E_S;
+    assign za = C_S | E_S;
     
     // Getting Weird Wired
     assign A = A_S;
